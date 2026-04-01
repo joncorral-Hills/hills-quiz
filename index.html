@@ -5,10 +5,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Which Hill's Prescription Diet Are You?</title>
   <meta name="description" content="Take the Hill's Prescription Diet personality quiz to discover which clinical nutrition profile matches your unique veterinary style." />
+  <!-- Montserrat kept as fallback; Gotham is loaded via self-hosted @font-face below -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
+    /* ── GOTHAM SELF-HOSTED ─────────────────────────────────────────────────
+       Drop your licensed Gotham .woff2 files into a fonts/ folder next to
+       index.html. The exact filenames below match the standard Hill's pack;
+       adjust as needed. Montserrat is kept as an automatic fallback.
+    ─────────────────────────────────────────────────────────────────────── */
+    @font-face {
+      font-family: 'Gotham';
+      src: url('fonts/Gotham-Book.woff2') format('woff2'),
+           url('fonts/Gotham-Book.woff')  format('woff');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Gotham';
+      src: url('fonts/Gotham-Medium.woff2') format('woff2'),
+           url('fonts/Gotham-Medium.woff')  format('woff');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Gotham';
+      src: url('fonts/Gotham-Bold.woff2') format('woff2'),
+           url('fonts/Gotham-Bold.woff')  format('woff');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Gotham';
+      src: url('fonts/Gotham-Black.woff2') format('woff2'),
+           url('fonts/Gotham-Black.woff')  format('woff');
+      font-weight: 900;
+      font-style: normal;
+      font-display: swap;
+    }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -33,7 +71,7 @@
     }
 
     body {
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Gotham', 'Montserrat', sans-serif;
       background: linear-gradient(135deg, #0a1628 0%, #1a3a6b 40%, #0f2d5c 70%, #0a1628 100%);
       min-height: 100vh;
       color: var(--gray-800);
@@ -93,8 +131,8 @@
     .lb2 { width: 10px; height: 28px; background: var(--blue-navy); }
     .lb3 { width: 10px; height: 36px; background: var(--red-hills); }
     .logo-text {
-      font-family: 'Playfair Display', serif;
-      font-weight: 800;
+      font-family: 'Gotham', 'Montserrat', sans-serif;
+      font-weight: 900;
       font-size: 20px;
       color: var(--blue-navy);
       letter-spacing: -0.5px;
@@ -140,8 +178,8 @@
       border-top: 8px solid var(--blue-navy);
     }
     .start-headline {
-      font-family: 'Playfair Display', serif;
-      font-weight: 800;
+      font-family: 'Gotham', 'Montserrat', sans-serif;
+      font-weight: 900;
       font-size: clamp(30px, 5vw, 46px);
       color: var(--blue-deepest);
       line-height: 1.15;
@@ -244,9 +282,9 @@
       margin-bottom: 16px;
     }
     .q-title {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Gotham', 'Montserrat', sans-serif;
       font-size: clamp(22px, 3.5vw, 30px);
-      font-weight: 700;
+      font-weight: 900;
       color: var(--blue-deepest);
       text-align: center;
       margin-bottom: 36px;
@@ -476,9 +514,9 @@
     .legal-inner { max-width: 520px; width: 100%; }
     .legal-card { padding: 52px 44px; text-align: center; }
     .legal-headline {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Gotham', 'Montserrat', sans-serif;
       font-size: 28px;
-      font-weight: 700;
+      font-weight: 900;
       color: var(--blue-deepest);
       margin-bottom: 12px;
     }
@@ -589,9 +627,9 @@
       margin-bottom: 10px;
     }
     .result-name {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Gotham', 'Montserrat', sans-serif;
       font-size: clamp(24px, 4vw, 40px);
-      font-weight: 800;
+      font-weight: 900;
       color: var(--blue-deepest);
       line-height: 1.2;
       margin-bottom: 16px;
