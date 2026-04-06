@@ -1024,6 +1024,14 @@ const diets = [
     color: "#be123c",
     bg: "linear-gradient(135deg, #be123c, #e11d48)",
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>`
+  },
+  {
+    name: "Prescription Diet Multi-Organ Complex Support",
+    subtitle: "Multi-Organ Care",
+    description: "You are the ultimate multitasker. Hill's Prescription Diet Multi-Organ Complex Support is built to address the unique nutritional needs of multiple organ systems at once — and so are you. You have a rare ability to manage complexity with grace, adapt to any situation, and show up for everyone around you simultaneously. You don't fit into one box, and that's exactly your superpower.",
+    color: "#0e7490",
+    bg: "linear-gradient(135deg, #0e7490, #0891b2)",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line></svg>`
   }
 ];
 
@@ -1150,11 +1158,11 @@ function calculateResult() {
   Object.values(answers).forEach(val => {
     if (val >= 0 && val < 6) scores[val]++;
   });
-  let maxIdx = 0;
-  for (let i = 1; i < scores.length; i++) {
-    if (scores[i] > scores[maxIdx]) maxIdx = i;
-  }
-  return diets[maxIdx];
+  const maxScore = Math.max(...scores);
+  const topCount = scores.filter(s => s === maxScore).length;
+  // Tied top score → multiple systems signaling → Multi-Organ
+  if (topCount > 1) return diets[6];
+  return diets[scores.indexOf(maxScore)];
 }
 
 // ══════════════════════════════════════════
