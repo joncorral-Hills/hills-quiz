@@ -1002,12 +1002,12 @@ const diets = [
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>`
   },
   {
-    name: "Prescription Diet Metabolic",
-    subtitle: "Weight Management",
-    description: "You are the energizer! Metabolic works with a pet's unique energy expenditure, and similarly, you bring incredible energy to every room you enter. You are highly active, fun-loving, and love helping others reach their full potential.",
-    color: "#047857",
-    bg: "linear-gradient(135deg, #047857, #059669)",
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>`
+    name: "Prescription Diet Metabolic + j/d",
+    subtitle: "Weight & Joint Care",
+    description: "You are the ultimate dynamic duo. Hill's Prescription Diet Metabolic + j/d is the only diet clinically proven to support both weight loss and joint health simultaneously — and you operate the same way. You're always working on two things at once, bringing energy and endurance to everything you do. Multitasking isn't a skill for you, it's a lifestyle.",
+    color: "#d97706",
+    bg: "linear-gradient(135deg, #d97706, #f59e0b)",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>`
   },
   {
     name: "Prescription Diet c/d Multicare Stress",
@@ -1032,16 +1032,8 @@ const diets = [
     color: "#0e7490",
     bg: "linear-gradient(135deg, #0e7490, #0891b2)",
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line></svg>`
-  },
-  {
-    name: "Prescription Diet Metabolic + j/d",
-    subtitle: "Weight & Joint Care",
-    description: "You are the ultimate dynamic duo. Hill's Prescription Diet Metabolic + j/d is the only diet clinically proven to support both weight loss and joint health simultaneously — and you operate the same way. You're always working on two things at once, bringing energy and endurance to everything you do. Multitasking isn't a skill for you, it's a lifestyle.",
-    color: "#d97706",
-    bg: "linear-gradient(135deg, #d97706, #f59e0b)",
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>`
-  }
 ];
+
 
 // ══════════════════════════════════════════
 //  STATE
@@ -1168,11 +1160,8 @@ function calculateResult() {
   });
   const maxScore = Math.max(...scores);
   const topIndices = scores.map((s, i) => s === maxScore ? i : -1).filter(i => i >= 0);
-  // Clear winner
+  // Clear winner → that diet; any tie → Multi-Organ (index 6)
   if (topIndices.length === 1) return diets[topIndices[0]];
-  // 2-way tie that includes Metabolic (index 3) → Metabolic + j/d
-  if (topIndices.length === 2 && topIndices.includes(3)) return diets[7];
-  // Any other tie → Multi-Organ
   return diets[6];
 }
 
