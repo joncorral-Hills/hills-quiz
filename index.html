@@ -501,6 +501,7 @@
       cursor: not-allowed;
     }
     .btn-next svg { width: 18px; height: 18px; }
+    .btn-next { display: none; }
 
     /* ══════════════════════════════════════════
        SCREEN: LEGAL
@@ -626,24 +627,20 @@
       text-transform: uppercase;
       margin-bottom: 10px;
     }
-    .result-name {
-      font-family: 'Gotham', 'Montserrat', sans-serif;
-      font-size: clamp(24px, 4vw, 40px);
-      font-weight: 900;
-      color: var(--blue-deepest);
-      line-height: 1.2;
-      margin-bottom: 16px;
-    }
-    .result-badge {
-      display: inline-block;
-      padding: 5px 18px;
-      border-radius: var(--radius-full);
+    .result-product-name {
       font-size: 12px;
       font-weight: 700;
-      letter-spacing: 1px;
+      letter-spacing: 2.5px;
       text-transform: uppercase;
-      color: #fff;
-      margin-bottom: 28px;
+      color: var(--gray-400);
+      margin-bottom: 8px;
+    }
+    .result-title {
+      font-family: 'Gotham', 'Montserrat', sans-serif;
+      font-size: clamp(28px, 5vw, 54px);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 24px;
     }
     .result-divider {
       width: 48px;
@@ -840,9 +837,9 @@
         <div class="result-icon-ring" id="result-icon-ring">
           <!-- icon injected by JS -->
         </div>
-        <div class="result-congrats" id="result-congrats">🎉 Congratulations!</div>
-        <h1 class="result-name" id="result-name"></h1>
-        <span class="result-badge" id="result-badge"></span>
+        <div class="result-congrats" id="result-congrats">YOU ARE...</div>
+        <div class="result-product-name" id="result-product-name"></div>
+        <h1 class="result-title" id="result-title"></h1>
         <div class="result-divider"></div>
         <p class="result-description" id="result-description"></p>
         <div class="result-actions">
@@ -957,7 +954,7 @@ const questions = [
 const diets = [
   {
     name: "Prescription Diet k/d",
-    subtitle: "Kidney Care",
+    title: "THE O.G.",
     description: "k/d is the original Prescription Diet product and you're the reliable and consistent friend that anyone can count on for the long haul. But you're not a pushover — just like k/d controls levels of phosphorus and protein, you know how to manage others toward a desired result.",
     color: "#F68D2E",
     bg: "linear-gradient(135deg, #F68D2E, #e07518)",
@@ -965,7 +962,7 @@ const diets = [
   },
   {
     name: "Prescription Diet Gastrointestinal Biome",
-    subtitle: "Digestive / Fiber Care",
+    title: "THE NETWORKER",
     description: "You're an innovator! Just like GI Biome utilizes cutting-edge microbiome technology to promote healthy stool, you look past the surface to solve problems at their root. Your friends appreciate your deeply analytical and transformative nature.",
     color: "#DA1884",
     bg: "linear-gradient(135deg, #DA1884, #c00f71)",
@@ -973,7 +970,7 @@ const diets = [
   },
   {
     name: "Prescription Diet Derm Complete",
-    subtitle: "Environmental & Food Sensitivities",
+    title: "THE TEAM PLAYER",
     description: "You are the ultimate protector. Derm Complete is the only diet clinically tested for both food and environmental allergies, making it comprehensive and versatile — exactly like you! You thrive outside and have a thick skin.",
     color: "#2774ae",
     bg: "linear-gradient(135deg, #2774ae, #1a5e94)",
@@ -981,39 +978,45 @@ const diets = [
   },
   {
     name: "Prescription Diet Metabolic + j/d",
-    subtitle: "Weight & Joint Care",
+    title: "THE MOTIVATOR",
     description: "You are the ultimate dynamic duo. Hill's Prescription Diet Metabolic + j/d is the only diet clinically proven to support both weight loss and joint health simultaneously — and you operate the same way. You're always working on two things at once, bringing energy and endurance to everything you do. Multitasking isn't a skill for you, it's a lifestyle.",
-    color: "#B58150",
-    bg: "linear-gradient(135deg, #B58150, #9a6c3a)",
+    color: "#64A70B",
+    bg: "linear-gradient(135deg, #64A70B, #4d840a)",
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>`
   },
   {
     name: "Prescription Diet c/d Multicare Stress",
-    subtitle: "Urinary Care",
+    title: "THE PEACEMAKER",
     description: "You are the peacemaker. You thrive in complex, high-stress situations and know exactly how to bring the temperature down. Just as c/d Multicare Stress manages urinary health while soothing stress, you keep things flowing smoothly.",
-    color: "#FFA300",
-    bg: "linear-gradient(135deg, #FFA300, #e08c00)",
+    color: "#f7a30a",
+    bg: "linear-gradient(135deg, #f7a30a, #d68800)",
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>`
   },
   {
-    name: "Prescription Diet ONC Care",
-    subtitle: "Oncology Care",
-    description: "You are the ultimate nurturer. When things get tough, you step up. ONC Care is designed to encourage eating and support strength when it's needed most, reflecting your compassionate, thoughtful, and highly supportive personality.",
-    color: "#FFA38B",
-    bg: "linear-gradient(135deg, #FFA38B, #e8876e)",
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>`
+    name: "Prescription Diet i/d",
+    title: "THE NURTURER",
+    description: "You've often been nicknamed the parent of your friend group, but you don't mind. In the same way that i/d is a great choice for post-surgical nutrition, you love to take care of everyone, especially in their times of need.",
+    color: "#AB2328",
+    bg: "linear-gradient(135deg, #AB2328, #8a1b1f)",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>`
   },
   {
-    name: "Prescription Diet Multi-Organ Complex Support",
-    subtitle: "Multi-Organ Care",
-    description: "You are the ultimate multitasker. Hill's Prescription Diet Multi-Organ Complex Support is built to address the unique nutritional needs of multiple organ systems at once — and so are you. You have a rare ability to manage complexity with grace, adapt to any situation, and show up for everyone around you simultaneously. You don't fit into one box, and that's exactly your superpower.",
-    color: "#0D5257",
-    bg: "linear-gradient(135deg, #0D5257, #08363a)",
+    name: "Prescription Diet Multiorgan",
+    title: "THE PROBLEM-SOLVER",
+    description: "You're the one colleagues call when a case refuses to fit neatly into one box. You love piecing together clues from multiple systems and turning chaos into a clear plan. Multiorgan is your match—one smart solution that helps you manage complexity without sacrificing control.",
+    color: "#cf4520",
+    bg: "linear-gradient(135deg, #cf4520, #a83618)",
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line></svg>`
+  },
+  {
+    name: "Prescription Diet Brain Diet + j/d",
+    title: "THE FORWARD-THINKER",
+    description: "You're always thinking a few steps ahead—about how today's choices will shape a pet's tomorrows. You focus on keeping senior pets sharp, engaged, and able to move through life comfortably. Brain Diet + j/d is your match: nutrition that supports both mind and mobility so your patients can enjoy more good days, for longer.",
+    color: "#A15A95",
+    bg: "linear-gradient(135deg, #A15A95, #7d4574)",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>`
   }
 ];
-
-
 // ══════════════════════════════════════════
 //  STATE
 // ══════════════════════════════════════════
@@ -1117,11 +1120,18 @@ function renderQuestion(index) {
 
 function selectOption(qIndex, optIndex) {
   answers[qIndex] = optIndex;
-  // Update selection UI
   document.querySelectorAll('.option-btn').forEach((btn, i) => {
     btn.classList.toggle('selected', i === optIndex);
   });
-  updateNextBtn(qIndex);
+  // Auto-advance after brief visual feedback
+  setTimeout(() => {
+    if (qIndex < questions.length - 1) {
+      currentQ++;
+      renderQuestion(currentQ);
+    } else {
+      showScreen('screen-legal');
+    }
+  }, 400);
 }
 
 function updateNextBtn(qIndex) {
@@ -1139,9 +1149,9 @@ function calculateResult() {
   });
   const maxScore = Math.max(...scores);
   const topIndices = scores.map((s, i) => s === maxScore ? i : -1).filter(i => i >= 0);
-  // Clear winner → that diet; any tie → Multi-Organ (index 6)
-  if (topIndices.length === 1) return diets[topIndices[0]];
-  return diets[6];
+  if (topIndices.length === 1) return diets[topIndices[0]];       // clear winner
+  if (topIndices.length === 2) return diets[6];                   // 2-way tie → THE PROBLEM-SOLVER
+  return diets[7];                                                // 3+-way tie → THE FORWARD-THINKER
 }
 
 // ══════════════════════════════════════════
@@ -1154,9 +1164,9 @@ function renderResults() {
   document.getElementById('result-icon-ring').style.background = result.bg;
   document.getElementById('result-icon-ring').innerHTML = result.icon;
   document.getElementById('result-congrats').style.color = result.color;
-  document.getElementById('result-name').textContent = `You're ${result.name}`;
-  document.getElementById('result-badge').textContent = result.subtitle;
-  document.getElementById('result-badge').style.background = result.bg;
+  document.getElementById('result-product-name').textContent = result.name;
+  document.getElementById('result-title').textContent = `"${result.title}"`;
+  document.getElementById('result-title').style.color = result.color;
   document.getElementById('result-description').textContent = result.description;
 
   showScreen('screen-results');
